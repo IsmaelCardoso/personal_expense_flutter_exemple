@@ -35,7 +35,6 @@ class MyHomePage extends StatelessWidget {
         title: Text("Expenses"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -92,6 +91,43 @@ class MyHomePage extends StatelessWidget {
                       ],
                     )))
                 .toList(),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Title",
+                    ),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Value (R\$)",
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.purple),
+                        ),
+                        child: Text(
+                          "New Transaction",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () => {},
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),
