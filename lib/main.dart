@@ -19,14 +19,18 @@ class MyHomePage extends StatelessWidget {
         title: Text("Expenses"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
+            width: double.infinity,
             child: Card(
-              child: Text("Chart"),
+              child: Text(
+                "Chart",
+              ),
               color: Colors.grey,
               elevation: 5,
             ),
-            width: double.infinity,
           ),
           Card(
             child: Text("Transactiosn list"),
