@@ -60,11 +60,18 @@ class MyHomePage extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                               border: Border.all(
-                            color: Colors.black,
+                            color: Colors.purple,
                             width: 2,
                           )),
                           padding: EdgeInsets.all(10),
-                          child: Text(transaction.value.toString()),
+                          child: Text(
+                            transaction.value.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.purple,
+                            ),
+                          ),
                         ),
                         Column(
                           children: [
