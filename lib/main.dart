@@ -14,6 +14,25 @@ class Expenses extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline1: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              subtitle1: TextStyle(color: Colors.grey),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline1: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+        ),
       ),
     );
   }
@@ -28,13 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final _transactions = [
     Transaction(
       id: "t1",
-      title: "new running shoes",
+      title: "New running shoes",
       value: 310.76,
       date: DateTime.now(),
     ),
     Transaction(
       id: "t2",
-      title: "electricity bill",
+      title: "Electricity bill",
       value: 211.30,
       date: DateTime.now(),
     ),
@@ -68,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Expenses"),
+        title: Text("Personal Expenses"),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
