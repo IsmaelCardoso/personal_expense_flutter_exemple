@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import './models/transaction.dart';
+import './components/chart.dart';
 import './components/transaction_list.dart';
 import './components/transaction_form.dart';
 
@@ -45,19 +46,37 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: "t1",
-    //   title: "New running shoes",
-    //   value: 310.76,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: "t2",
-    //   title: "Electricity bill",
-    //   value: 211.30,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: "t0",
+      title: "Old bill",
+      value: 310.76,
+      date: DateTime.now().subtract(Duration(days: 33)),
+    ),
+    Transaction(
+      id: "t1",
+      title: "New running shoes",
+      value: 310.76,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
+    Transaction(
+      id: "t2",
+      title: "Electricity bill",
+      value: 211.30,
+      date: DateTime.now().subtract(Duration(days: 4)),
+    ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions
+        .where(
+          (transaction) => transaction.date.isAfter(
+            DateTime.now().subtract(
+              Duration(days: 7),
+            ),
+          ),
+        )
+        .toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTrasaction = Transaction(
@@ -98,16 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text(
-                  "Chart",
-                ),
-                color: Colors.grey,
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),
