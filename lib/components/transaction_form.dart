@@ -49,9 +49,24 @@ class _TransactionFormState extends State<TransactionForm> {
               ),
             ),
             Row(
+              children: [
+                Text("No date selected"),
+                TextButton(
+                  onPressed: () => {},
+                  child: Text(
+                    "Select date",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(
+                ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
                         Theme.of(context).primaryColor),
@@ -59,7 +74,7 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: Text(
                     "New Transaction",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).textTheme.button.color,
                     ),
                   ),
                   onPressed: _submitForm,

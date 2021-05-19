@@ -24,6 +24,10 @@ class Expenses extends StatelessWidget {
                 color: Colors.black,
               ),
               subtitle1: TextStyle(color: Colors.grey),
+              button: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
         appBarTheme: AppBarTheme(
           textTheme: ThemeData.light().textTheme.copyWith(
