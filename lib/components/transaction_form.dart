@@ -49,63 +49,71 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              decoration: InputDecoration(
-                labelText: "Title",
-              ),
-            ),
-            TextField(
-              controller: _valueController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: "Value (R\$)",
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(_selectedDate == null
-                      ? "No date selected"
-                      : 'Selected date: ${DateFormat("dd/MM/y").format(_selectedDate)}'),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+            right: 10,
+            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+            left: 10,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: "Title",
                 ),
-                TextButton(
-                  onPressed: _showDatePicker,
-                  child: Text(
-                    "Select date",
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).primaryColor),
-                  ),
-                  child: Text(
-                    "New Transaction",
-                    style: TextStyle(
-                      color: Theme.of(context).textTheme.button.color,
-                    ),
-                  ),
-                  onPressed: _submitForm,
+              ),
+              TextField(
+                controller: _valueController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: "Value (R\$)",
                 ),
-              ],
-            )
-          ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(_selectedDate == null
+                        ? "No date selected"
+                        : 'Selected date: ${DateFormat("dd/MM/y").format(_selectedDate)}'),
+                  ),
+                  TextButton(
+                    onPressed: _showDatePicker,
+                    child: Text(
+                      "Select date",
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Theme.of(context).primaryColor),
+                    ),
+                    child: Text(
+                      "New Transaction",
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.button.color,
+                      ),
+                    ),
+                    onPressed: _submitForm,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
