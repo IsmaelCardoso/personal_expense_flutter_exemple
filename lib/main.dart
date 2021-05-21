@@ -110,6 +110,15 @@ class _MyHomePageState extends State<MyHomePage> {
     final appBar = AppBar(
       title: Text("Personal Expenses"),
       actions: [
+        if (_isLandscape)
+          IconButton(
+            icon: Icon(_showChart ? Icons.list_alt : Icons.show_chart),
+            onPressed: () => {
+              setState(() {
+                _showChart = !_showChart;
+              })
+            },
+          ),
         IconButton(
           icon: Icon(Icons.add),
           onPressed: () => _openTrasactionFormModal(context),
@@ -127,20 +136,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            if (_isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Display Chart"),
-                  Switch(
-                      value: _showChart,
-                      onChanged: (value) {
-                        setState(() {
-                          _showChart = value;
-                        });
-                      }),
-                ],
-              ),
+            // if (_isLandscape)
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text("Display Chart"),
+            //       Switch(
+            //           value: _showChart,
+            //           onChanged: (value) {
+            //             setState(() {
+            //               _showChart = value;
+            //             });
+            //           }),
+            //     ],
+            //   ),
             if (_showChart || !_isLandscape)
               Container(
                 height: avaliableHeight * (_isLandscape ? 0.7 : 0.3),
