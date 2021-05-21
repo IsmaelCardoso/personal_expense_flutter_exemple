@@ -5,8 +5,9 @@ import '../models/transaction.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransactions;
+  final bool isLandscape;
 
-  Chart(this.recentTransactions);
+  Chart(this.recentTransactions, this.isLandscape);
 
   List<Map<String, Object>> get groupedTransactions {
     return List.generate(7, (index) {
