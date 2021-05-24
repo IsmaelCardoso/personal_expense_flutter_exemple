@@ -118,10 +118,14 @@ class _MyHomePageState extends State<MyHomePage> {
     final mediaQuery = MediaQuery.of(context);
     bool _isLandscape = mediaQuery.orientation == Orientation.landscape;
 
+    final iconList = Platform.isIOS ? CupertinoIcons.refresh : Icons.list;
+    final iconChart =
+        Platform.isIOS ? CupertinoIcons.refresh : Icons.show_chart;
+
     final action = [
       if (_isLandscape)
         _getIconButton(
-          _showChart ? Icons.list_alt : Icons.show_chart,
+          _showChart ? iconList : iconChart,
           () => {
             setState(() {
               _showChart = !_showChart;
@@ -151,39 +155,41 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar.preferredSize.height -
         mediaQuery.padding.top;
 
-    final bodyPage = SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          // if (_isLandscape)
-          //   Row(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Text("Display Chart"),
-          //       Switch.adaptive(
-          //           activeColor: Theme.of(context).accentColor,
-          //           value: _showChart,
-          //           onChanged: (value) {
-          //             setState(() {
-          //               _showChart = value;
-          //             });
-          //           }),
-          //     ],
-          //   ),
-          if (_showChart || !_isLandscape)
-            Container(
-              height: avaliableHeight * (_isLandscape ? 0.75 : 0.3),
-              child: Chart(_recentTransactions, _isLandscape),
-            ),
-          if (!_showChart || !_isLandscape)
-            Container(
-              height: avaliableHeight * (_isLandscape ? 1 : 0.7),
-              child: TransactionList(
-                _transactions,
-                _removeTransaction,
+    final bodyPage = SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            // if (_isLandscape)
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Text("Display Chart"),
+            //       Switch.adaptive(
+            //           activeColor: Theme.of(context).accentColor,
+            //           value: _showChart,
+            //           onChanged: (value) {
+            //             setState(() {
+            //               _showChart = value;
+            //             });
+            //           }),
+            //     ],
+            //   ),
+            if (_showChart || !_isLandscape)
+              Container(
+                height: avaliableHeight * (_isLandscape ? 0.75 : 0.3),
+                child: Chart(_recentTransactions, _isLandscape),
               ),
-            ),
-        ],
+            if (!_showChart || !_isLandscape)
+              Container(
+                height: avaliableHeight * (_isLandscape ? 1 : 0.7),
+                child: TransactionList(
+                  _transactions,
+                  _removeTransaction,
+                ),
+              ),
+          ],
+        ),
       ),
     );
 
