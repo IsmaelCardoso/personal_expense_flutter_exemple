@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:personal_expense_flutter_exemple/components/adaptativeButton.dart';
+import 'package:personal_expense_flutter_exemple/components/adaptativeDatePicker.dart';
 import 'package:personal_expense_flutter_exemple/components/adaptativeTextField.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -32,23 +32,6 @@ class _TransactionFormState extends State<TransactionForm> {
     return;
   }
 
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate != null) {
-        setState(() {
-          _selectedDate = pickedDate;
-        });
-      }
-
-      return;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -73,25 +56,13 @@ class _TransactionFormState extends State<TransactionForm> {
                 onSubmitted: (_) => _submitForm(),
                 label: "Value (R\$)",
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(_selectedDate == null
-                        ? "No date selected"
-                        : 'Selected date: ${DateFormat("dd/MM/y").format(_selectedDate)}'),
-                  ),
-                  TextButton(
-                    onPressed: _showDatePicker,
-                    child: Text(
-                      "Select date",
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
-              ),
+              AdaptativeDatePicker(
+                  selectedDate: _selectedDate,
+                  onDateChanged: (newDate) {
+                    setState(() {
+                      _selectedDate = newDate;
+                    });
+                  }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
