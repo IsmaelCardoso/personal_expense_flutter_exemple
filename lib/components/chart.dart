@@ -22,16 +22,10 @@ class Chart extends StatelessWidget {
         bool someMonth = recentTransaction.date.month == weekDay.month;
         bool someYear = recentTransaction.date.year == weekDay.year;
 
-        print(recentTransaction.date);
-        print(recentTransaction.value);
-
         if (someDay && someMonth && someYear) {
           totalSum += recentTransaction.value;
         }
       });
-
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
 
       return {
         "day": DateFormat.E().format(weekDay)[0],
