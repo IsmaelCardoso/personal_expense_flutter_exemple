@@ -16,14 +16,26 @@ class TransactionList extends StatelessWidget {
         ? LayoutBuilder(builder: (ctx, constraints) {
             return TransactionEmpty(constraints: constraints);
           })
-        : ListView.builder(
-            itemCount: transactions.length,
-            itemBuilder: (context, index) {
-              final transaction = transactions[index];
+        : ListView(
+            children: transactions.map((transaction) {
               return TransactionItem(
+                key: ValueKey(transaction
+                    .id), //Desta forma o desempenho é melhor, precisa passar a "key" a aprtir do elemento -> "TransactionItem"
                 transaction: transaction,
                 onRemove: onRemove,
               );
-            });
+            }).toList(),
+          );
+    // ListView.builder(
+    //     itemCount: transactions.length,
+    //     itemBuilder: (context, index) {
+    //       final transaction = transactions[index];
+    //       return TransactionItem(
+    //         key: GlobalObjectKey(
+    //             transaction), //Esta forma é muito onerosa ao desempenho, usar somente quando necessãrio
+    //         transaction: transaction,
+    //         onRemove: onRemove,
+    //       );
+    //     });
   }
 }
